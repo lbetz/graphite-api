@@ -3,21 +3,21 @@ set -xe
 
 export VERSION=1.1.3
 
-apt-get -y install build-essential python-dev python-virtualenv libffi-dev
+apt-get -y install build-essential python3-dev python3-pip python3-virtualenv virtualenvwrapper libffi-dev
 
 rm -rf build
 
 mkdir -p build/usr/share/python
-virtualenv build/usr/share/python/graphite
-build/usr/share/python/graphite/bin/pip install -U pip distribute
-build/usr/share/python/graphite/bin/pip uninstall -y distribute
+virtualenv --python=/usr/bin/python3 build/usr/share/python/graphite
+#build/usr/share/python/graphite/bin/pip install -U pip distribute
+#build/usr/share/python/graphite/bin/pip uninstall -y distribute
 
-build/usr/share/python/graphite/bin/pip install graphite-api[sentry,cyanite] gunicorn==18.0 virtualenv-tools
+build/usr/share/python/graphite/bin/pip install graphite-api[sentry,cyanite] gunicorn virtualenv-tools3
 
 find build ! -perm -a+r -exec chmod a+r {} \;
 
 cd build/usr/share/python/graphite
-sed -i "s/'\/bin\/python'/\('\/bin\/python','\/bin\/python2'\)/g" lib/python2.7/site-packages/virtualenv_tools.py
+sed -i "s/'\/bin\/python'/\('\/bin\/python','\/bin\/python3'\)/g" lib/python3.7/site-packages/virtualenv_tools.py
 ./bin/virtualenv-tools --update-path /usr/share/python/graphite
 cd -
 

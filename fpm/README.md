@@ -16,7 +16,7 @@ Prerequisites (to build a package)
 ----------------------------------
 
 * FPM (`sudo gem install fpm`)
-* `sudo apt-get install python-dev libffi-dev python-virtualenv`
+* `sudo apt-get install python3-dev libffi-dev python3-virtualenv`
 * virtualenv-tools (either build it with fpm and install it or `sudo pip
   install virtualenv-tools`).
 
